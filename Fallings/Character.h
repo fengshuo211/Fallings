@@ -1,6 +1,8 @@
-#pragma once
 #include <SDL.h>
 #include "GameTexture.h"
+
+#ifndef CHARACTER_H
+#define CHARACTER_H
 
 class Character
 {
@@ -42,3 +44,4 @@ private:
 	int SCREEN_WIDTH;
 	int SCREEN_HEIGHT;
 };
+#endif 

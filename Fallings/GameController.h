@@ -1,8 +1,10 @@
-#pragma once
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_mixer.h>
 #include "GameTexture.h"
 
+#ifndef GAME_CONTROLLER_H
+#define GAME_CONTROLLER_H
 class GameController {
 public:
 	GameController();
@@ -21,7 +23,7 @@ private:
 	// Variables
 	SDL_Window *mainGameWindow;
 	SDL_Renderer *mainGameWindowRenderer;
-
+	Mix_Music *music;
 	imageTexture *gameBackgroundTexture = NULL;
 	imageTexture *gameFloorTexture = NULL;
 	// Game Window 
@@ -33,3 +35,4 @@ private:
 
 	SDL_Rect floorRect { 0, 380, SCREEN_WIDTH, SCREEN_HEIGHT - 380 };
 };
+#endif

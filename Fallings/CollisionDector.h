@@ -1,6 +1,6 @@
-#pragma once
 #include <SDL.h>
-// Simple Bounding Box collision dector
+#ifndef COLLISIONDECTOR_H
+#define COLLISIONDECTOR_H
 
 class CollisonDector
 {
@@ -9,3 +9,4 @@ public:
 	~CollisonDector();
 	bool check(SDL_Rect *rect1, SDL_Rect *rect2);
 };
+#endif

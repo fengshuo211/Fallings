@@ -1,9 +1,11 @@
-#pragma once
 #include <SDL.h>
 #include <vector>
 #include "GameTexture.h"
 #include "Character.h"
 #include "CollisionDector.h"
+
+#ifndef ENERMY_H
+#define ENERMY_H
 
 class Enermy
 {
@@ -45,3 +47,4 @@ private:
 
 	int VAL = 1;
 };
+#endif

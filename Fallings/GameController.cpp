@@ -72,7 +72,7 @@ void GameController::startGame()
 
 	Character mainCharacter(SCREEN_WIDTH / 2, SCREEN_HEIGHT - floorRect.h - 40, mainGameWindowRenderer, SCREEN_WIDTH, SCREEN_HEIGHT);
 	EneryController enermyController (SCREEN_WIDTH, SCREEN_HEIGHT, mainGameWindowRenderer, &points);
-
+	music = Mix_LoadMUS("assets/music/background.wav");
 	enermyController.addEnermy();
 
 	int timeLeftInSeconds = 0;
@@ -91,6 +91,9 @@ void GameController::startGame()
 			continue;
 		}
 
+		if (Mix_PlayingMusic() == 0) {
+			Mix_PlayMusic(music, -1);
+		}
 		renderBackground();
 
 		// Render the main character
@@ -130,6 +133,9 @@ void GameController::closeGame()
 	delete gameFloorTexture;
 	SDL_DestroyRenderer(mainGameWindowRenderer);
 	SDL_DestroyWindow(mainGameWindow);
+	Mix_FreeMusic(music);
+
+	music = NULL;
 }
 
 void GameController::renderGame()
@@ -152,37 +158,30 @@ void GameController::renderBackground()
 	gameBackgroundTexture->render();
 	gameFloorTexture->renderWithRect(&floorRect);
 
-	TextTexture indicateTimeText;
-	indicateTimeText.setFont("fonts/lazy.ttf", 28);
-	indicateTimeText.setColor(0, 0, 0);
-	indicateTimeText.renderText("Time Left: ", mainGameWindowRenderer, 0, 0, 200, 20);
+	TextTexture textTexture;
+	textTexture.setFont("fonts/lazy.ttf", 28);
+	textTexture.setColor(0, 0, 0);
+	textTexture.renderText("Time Left: ", mainGameWindowRenderer, 0, 0, 200, 20);
+	textTexture.renderText("Frame: ", mainGameWindowRenderer, 0, 20, 100, 20);
+	textTexture.renderText("Points: ", mainGameWindowRenderer, SCREEN_WIDTH - 120, 10, 80, 20);
 
-	TextTexture frameText;
-	frameText.setFont("fonts/lazy.ttf", 28);
-	frameText.setColor(0, 0, 0);
-	frameText.renderText("Frame: ", mainGameWindowRenderer, 0, 20, 100, 20);
-
-	TextTexture PointsText;
-	PointsText.setFont("fonts/lazy.ttf", 28);
-	PointsText.setColor(0, 0, 0);
-	PointsText.renderText("Points: ", mainGameWindowRenderer, SCREEN_WIDTH - 120, 10, 80, 20);
-
-	TextTexture ScoreText;
 	std::stringstream val;
 	val << points;
-	ScoreText.setFont("fonts/lazy.ttf", 28);
-	ScoreText.setColor(0, 0, 0);
-	PointsText.renderText(val.str().c_str(), mainGameWindowRenderer, SCREEN_WIDTH - 50, 10, 20, 20);
+	textTexture.renderText(val.str().c_str(), mainGameWindowRenderer, SCREEN_WIDTH - 50, 10, 20, 20);
 }
 
 void GameController::renderGameEnd()
 {
 	gameBackgroundTexture->render();
 
-	TextTexture PointsText;
-	PointsText.setFont("fonts/lazy.ttf", 28);
-	PointsText.setColor(0, 0, 0);
-	PointsText.renderText("Points: ", mainGameWindowRenderer, SCREEN_WIDTH/2 - 120, SCREEN_HEIGHT-400, 200, 120);
-	
+	TextTexture textTexture;
+	textTexture.setFont("fonts/lazy.ttf", 28);
+	textTexture.setColor(0, 0, 0);
+	textTexture.renderText("Points: ", mainGameWindowRenderer, SCREEN_WIDTH / 2 - 140, SCREEN_HEIGHT - 400, 200, 120);
+
+	std::stringstream val;
+	val << points;
+	textTexture.renderText(val.str().c_str(), mainGameWindowRenderer, SCREEN_WIDTH / 2, SCREEN_HEIGHT - 380, 180, 100);
+
 	gameFloorTexture->renderWithRect(&floorRect);
 }

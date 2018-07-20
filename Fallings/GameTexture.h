@@ -1,6 +1,8 @@
-#pragma once
 #include <vector>
 #include <SDL_ttf.h>
+
+#ifndef GAME_TEXTURE_H
+#define GAME_TEXTURE_H
 class TextTexture
 {
 public:
@@ -70,3 +72,4 @@ private:
 	SDL_Renderer *mainRenderer;
 	SDL_Texture *enermyTexture;
 };
+#endif
