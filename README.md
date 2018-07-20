@@ -10,3 +10,6 @@ https://joszs.itch.io/medieval-item-pack
 
 Cute raccoon 2d game sprite and animations
 https://null-painter-error.itch.io/cute-raccoon-2d-game-sprite-and-animations
+
+Background music 
+https://www.dl-sounds.com/royalty-free/patakas-world/
