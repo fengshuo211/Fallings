@@ -11,9 +11,9 @@ public:
 	void setColor(int r, int g, int b);
 	void close();
 private:
-	TTF_Font *font;
+	TTF_Font *font = NULL;
 	SDL_Color myColor;
-	SDL_Texture *generatedTexture;
+	SDL_Texture *generatedTexture = NULL;
 };
 
 class imageTexture
@@ -69,7 +69,7 @@ public:
 	void renderEnermy(SDL_Rect *renderRect);
 private:
 	SDL_Texture *convertImageToTexture(char *filePath);
-	SDL_Renderer *mainRenderer;
-	SDL_Texture *enermyTexture;
+	SDL_Renderer *mainRenderer = NULL;
+	SDL_Texture *enermyTexture = NULL;
 };
 #endif

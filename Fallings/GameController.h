@@ -15,15 +15,14 @@ public:
 
 	~GameController();
 private:
-	// Functions 
 	void checkNotNull(void * inputVariable, char *name);
 
 	void renderBackground();
 	void renderGameEnd();
-	// Variables
-	SDL_Window *mainGameWindow;
-	SDL_Renderer *mainGameWindowRenderer;
-	Mix_Music *music;
+
+	SDL_Window *mainGameWindow = NULL;
+	SDL_Renderer *mainGameWindowRenderer = NULL;
+	Mix_Music *music = NULL;
 	imageTexture *gameBackgroundTexture = NULL;
 	imageTexture *gameFloorTexture = NULL;
 	// Game Window 

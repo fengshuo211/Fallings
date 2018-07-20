@@ -17,7 +17,7 @@ public:
 	int const getPosition();
 	void isHit();
 private:
-	SDL_Renderer *mainRenderer;
+	SDL_Renderer *mainRenderer = NULL;
 	EnermyTexture enermyTexture;
 	CollisonDector collisionDector;
 	SDL_Rect enermyRect;
@@ -36,13 +36,12 @@ public:
 	std::vector <Enermy > enermyCollection;
 
 private:
-	// void addEnermy();
 	std::vector<int> getValidPositions();
 	int screenWidth;
 	int screenHeight;
 
-	int *points;
-	SDL_Renderer *mainRenderer;
+	int *points = NULL;
+	SDL_Renderer *mainRenderer = NULL;
 	float previousTimeTicks = 0.0;
 
 	int VAL = 1;
