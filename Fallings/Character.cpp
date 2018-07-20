@@ -37,9 +37,9 @@ Character::~Character()
 
 void Character::move(float currentTimeTicks)
 {
-	int newX = (int) (mainCharacter->x + xVal * (currentTimeTicks - previousTimeTicks) / 5);
+	int newX = static_cast<int> (mainCharacter->x + xVal * (currentTimeTicks - previousTimeTicks) / 5);
 	if (newX >= -25 && newX + mainCharacter->w <= SCREEN_WIDTH)
-		mainCharacter->x += (int) (xVal * (currentTimeTicks - previousTimeTicks) / 5);
+		mainCharacter->x += static_cast<int> (xVal * (currentTimeTicks - previousTimeTicks) / 5);
 	previousTimeTicks = currentTimeTicks;
 }
 

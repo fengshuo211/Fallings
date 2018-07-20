@@ -84,7 +84,7 @@ void EneryController::addEnermy()
 
 void EneryController::update(float currentTimeTicks, SDL_Rect *characterPosition)
 {
-	int addPixel = VAL * (currentTimeTicks - previousTimeTicks) / 10;
+	int addPixel = static_cast<int> (VAL * (currentTimeTicks - previousTimeTicks) / 10);
 	std::vector <Enermy >::iterator iter;
 
 	// Move each enermy accordingly

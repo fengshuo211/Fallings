@@ -94,11 +94,12 @@ void GameController::startGame()
 		renderBackground();
 
 		// Render the main character
-		mainCharacter.handleEvent(SDL_GetTicks());
+		float currentTicks = (float) SDL_GetTicks();
+		mainCharacter.handleEvent(currentTicks);
 		
-		enermyController.update(SDL_GetTicks(), mainCharacter.getCurrentPosition());
+		enermyController.update(currentTicks, mainCharacter.getCurrentPosition());
 
-		timeLeftInSeconds = SDL_GetTicks() / 1000;
+		timeLeftInSeconds = static_cast<int> (currentTicks / 1000);
 		timeLeftInSeconds = 60 - timeLeftInSeconds;
 
 		frameCountNumber = frameGenerated / (SDL_GetTicks() / 1000.f);;
