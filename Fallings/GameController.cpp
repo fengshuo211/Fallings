@@ -42,7 +42,7 @@ void GameController::initGame()
 		std::cout << "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError();
 	}
 
-	mainGameWindow = SDL_CreateWindow("Potato Games - Fallings", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+	mainGameWindow = SDL_CreateWindow("Fallings", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 	checkNotNull(mainGameWindow, "mainGameWindow");
 
 	mainGameWindowRenderer = SDL_CreateRenderer(mainGameWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
