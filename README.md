@@ -3,7 +3,7 @@
 A simple C++ game, developed by SDL2 library
 
 ## ScreenShot
-![ScreenShot](https://s3.us-east-2.amazonaws.com/sean-publiccontent/Capture.PNG)
+![ScreenShot](https://s3.us-east-2.amazonaws.com/sean-publiccontent/game_screenshot.PNG)
 
 ## Assets Credit
 FREE PLATFORMER GAME TILESET
