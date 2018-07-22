@@ -11,14 +11,12 @@
 #include "GameTexture.h"
 #include "Character.h"
 #include "Enermy.h"
+#include "Vector.h"
 
-GameController::GameController()
-{
-}
+GameController::GameController(){}
 
 void GameController::initGame()
 {
-	// Init SDL Video
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
 		std::cout << "Failed to init SDL_INIT_VIDEO OR SDL_INIT_AUDIO";
 	}
@@ -100,16 +98,22 @@ void GameController::startGame()
 		float currentTicks = (float) SDL_GetTicks();
 		mainCharacter.handleEvent(currentTicks);
 		
-		enermyController.update(currentTicks, mainCharacter.getCurrentPosition());
+		Vector playerPosition = mainCharacter.getCurrentPosition();
+		SDL_Rect *playerPositionInRect = new SDL_Rect();
+		playerPositionInRect->x = playerPosition.x;
+		playerPositionInRect->y = playerPosition.y;
+		playerPositionInRect->h = mainCharacter.getPlayerHeight();
+		playerPositionInRect->w = mainCharacter.getPlayerWidth();
+
+		enermyController.update(currentTicks, playerPositionInRect);
+		delete playerPositionInRect;
 
 		timeLeftInSeconds = static_cast<int> (currentTicks / 1000);
 		timeLeftInSeconds = 60 - timeLeftInSeconds;
 
-		frameCountNumber = frameGenerated / (SDL_GetTicks() / 1000.f);;
-		if (frameCountNumber > 2000000)
-		{
-			frameCountNumber = 0;
-		}
+		frameCountNumber = frameGenerated / (SDL_GetTicks() / 1000.f);
+
+		if (frameCountNumber > 2000000) { frameCountNumber = 0; }
 
 		timePassed.str("");
 		timePassed << timeLeftInSeconds;
@@ -122,8 +126,8 @@ void GameController::startGame()
 		
 		renderGame();
 		frameGenerated++;
-
 	}
+
 	closeGame();
 }
 
@@ -134,15 +138,10 @@ void GameController::closeGame()
 	SDL_DestroyRenderer(mainGameWindowRenderer);
 	SDL_DestroyWindow(mainGameWindow);
 	Mix_FreeMusic(music);
-
 	music = NULL;
 }
 
-void GameController::renderGame()
-{
-	SDL_RenderPresent(mainGameWindowRenderer);
-
-}
+void GameController::renderGame(){ SDL_RenderPresent(mainGameWindowRenderer); }
 
 GameController::~GameController(){}
 

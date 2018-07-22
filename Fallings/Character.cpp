@@ -4,22 +4,16 @@
 
 #include "Character.h"
 #include "GameTexture.h"
+#include "Vector.h"
 
-Character::Character(int inputX, int inputY, SDL_Renderer * inputRenderer, int screen_w, int screen_h)
+Character::Character(int inputX, int inputY, SDL_Renderer * inputRenderer, int screen_w, int screen_h): playerPosition(inputX, inputY)
 {
 	if (inputRenderer == NULL) {
 		std::cout << "input renderer can't be NULL";
 	}
 
-	x = inputX;
-	y = inputY;
 	renderer = inputRenderer;
-	mainCharacter = new SDL_Rect();
 
-	mainCharacter->x = x;
-	mainCharacter->y = y;
-	mainCharacter->h = h;
-	mainCharacter->w = w;
 	SCREEN_WIDTH = screen_w;
 	SCREEN_HEIGHT = screen_h;
 
@@ -28,18 +22,28 @@ Character::Character(int inputX, int inputY, SDL_Renderer * inputRenderer, int s
 
 Character::~Character()
 {
-	delete mainCharacter;
-	mainCharacter = NULL;
-
 	delete mainCharacterTexture;
 	mainCharacterTexture = NULL;
 }
 
 void Character::move(float currentTimeTicks)
 {
-	int newX = static_cast<int> (mainCharacter->x + xVal * (currentTimeTicks - previousTimeTicks) / 5);
-	if (newX >= -25 && newX + mainCharacter->w <= SCREEN_WIDTH)
-		mainCharacter->x += static_cast<int> (xVal * (currentTimeTicks - previousTimeTicks) / 5);
+	float timeDeltaInSeconds = (currentTimeTicks - previousTimeTicks) / 1000;
+
+	Vector nextPosition(playerPosition.x, playerPosition.y);
+	
+	// Move the player Vector to the currect place based on the speed and direction
+	// Calculate currenct Velocity
+	Vector playerVelocity = VectorMath::multiplyScalar(playerDirection, playerSpeed);
+	// Create a vector which respects the time delta
+	Vector velocityRespectTimeDelta(static_cast<int> (playerVelocity.x * timeDeltaInSeconds), playerVelocity.y);
+	
+	nextPosition.add(velocityRespectTimeDelta);
+
+	// Update the playerPosition if the nextPosition is within a valid range
+	if (nextPosition.x >= -15 && nextPosition.x <= SCREEN_WIDTH - 50) {
+		playerPosition.x = nextPosition.x;
+	}
 	previousTimeTicks = currentTimeTicks;
 }
 
@@ -52,12 +56,13 @@ void Character::handleEvent(float currentTimeTicks)
 		setMoveRight();
 	else
 		stop();
-
+	
 	move(currentTimeTicks);
-	if (xVal == 0) {
+
+	if (playerDirection.x == 0) {
 		renderStop();
 	}
-	else if (xVal > 0){
+	else if (playerDirection.x > 0){
 		renderRight();
 	}
 	else {
@@ -65,42 +70,27 @@ void Character::handleEvent(float currentTimeTicks)
 	}
 }
 
-SDL_Rect* Character::getCurrentPosition()
-{
-	return mainCharacter;
-}
+Vector Character::getCurrentPosition(){ return playerPosition; }
 
-void Character::renderPosition()
-{
-	SDL_SetRenderDrawColor(renderer, 51, 204, 51, 0);
-	SDL_RenderFillRect(renderer, mainCharacter);
-}
+int const Character::getPlayerWidth(){ return w; }
+
+int const Character::getPlayerHeight(){ return h;}
 
 void Character::renderRight() 
 {
-	mainCharacterTexture->renderMoveRight(mainCharacter);
+	mainCharacterTexture->renderMoveRight(playerPosition.x, playerPosition.y, w, h);
 }
 
 void Character::renderStop()
 {
-	mainCharacterTexture->renderStop(mainCharacter);
+	mainCharacterTexture->renderStop(playerPosition.x, playerPosition.y, w, h);
 }
 void Character::renderLeft()
 {
-	mainCharacterTexture->renderMoveLeft(mainCharacter);
+	mainCharacterTexture->renderMoveLeft(playerPosition.x, playerPosition.y, w, h);
 }
-void Character::setMoveLeft()
-{
-	xVal = -moveRate;
-}
+void Character::setMoveLeft(){ playerDirection.setVector(-1, 0); }
 
-void Character::setMoveRight()
-{
-	xVal = moveRate;
-}
+void Character::setMoveRight(){ playerDirection.setVector(1, 0); }
 
-void Character::stop()
-{
-	xVal = 0;
-}
-
+void Character::stop(){ playerDirection.setVector(0, 0); }

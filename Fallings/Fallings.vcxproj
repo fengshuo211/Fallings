@@ -152,6 +152,7 @@
     <ClCompile Include="GameController.cpp" />
     <ClCompile Include="GameTexture.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Vector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -160,6 +161,7 @@
     <ClInclude Include="GameController.h" />
     <ClInclude Include="GameTexture.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="Vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

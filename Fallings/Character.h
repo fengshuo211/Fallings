@@ -1,6 +1,6 @@
 #include <SDL.h>
 #include "GameTexture.h"
-
+#include "Vector.h"
 #ifndef CHARACTER_H
 #define CHARACTER_H
 
@@ -12,9 +12,11 @@ public:
 
 	void move(float currentTimeTicks);
 	void handleEvent(float currentTimeTicks);
-	SDL_Rect* getCurrentPosition();
+	Vector getCurrentPosition();
+	int const getPlayerWidth();
+	int const getPlayerHeight();
+
 private:
-	void renderPosition();
 
 	void renderRight();
 	void renderStop();
@@ -24,24 +26,20 @@ private:
 	void setMoveRight();
 	void stop();
 
-	SDL_Rect *mainCharacter = NULL;
-
 	CharacterTexture *mainCharacterTexture = NULL;
 	SDL_Renderer *renderer = NULL;
 	const Uint8* keystates = NULL;
 
-	int x;
-	int y;
-
-	int xVal = 0;
-
-	int moveRate = 1;
-	int h = 60;
-	int w = 60;
-
 	float previousTimeTicks = 0.0;
+	const int h = 60;
+	const int w = 60;
 
 	int SCREEN_WIDTH;
 	int SCREEN_HEIGHT;
+
+	// Vector Math Improvements
+	Vector playerPosition; // 2D vector to indicate the position of the player
+	Vector playerDirection;
+	int playerSpeed = 200; // 200 pixels per second
 };
 #endif 

@@ -38,9 +38,9 @@ public:
 	~CharacterTexture();
 	SDL_Texture *convertImageToTexture(char *filePath);
 	
-	void renderMoveLeft(SDL_Rect *renderingRect);
-	void renderMoveRight(SDL_Rect *renderingRect);
-	void renderStop(SDL_Rect *renderingRect);
+	void renderMoveLeft(int positionX, int positionY, int positionW, int positionH);
+	void renderMoveRight(int positionX, int positionY, int positionW, int positionH);
+	void renderStop(int positionX, int positionY, int positionW, int positionH);
 private:
 	SDL_Renderer *mainRenderer;
 	std::vector <SDL_Texture *> runningTextures;

@@ -141,12 +141,18 @@ SDL_Texture * CharacterTexture::convertImageToTexture(char *filePath)
 	return ret;	
 }
 
-void CharacterTexture::renderMoveLeft(SDL_Rect *renderingRect)
+void CharacterTexture::renderMoveLeft(int positionX, int positionY, int positionW, int positionH)
 {
+	SDL_Rect position;
+	position.x = positionX;
+	position.y = positionY;
+	position.w = positionW;
+	position.h = positionH;
+
 	SDL_Texture *nextTexture = runningTextures[nextLeftTextureIndex];
-	
+
 	previousCharacterDirection = 0;
-	
+
 	Uint32 currentTicks = SDL_GetTicks();
 	if (currentTicks - lastLeftRunningSwitchTime > (600 / runningTextures.size())) {
 		nextLeftTextureIndex++;
@@ -157,13 +163,19 @@ void CharacterTexture::renderMoveLeft(SDL_Rect *renderingRect)
 	}
 	nextRightTextureIndex = 0;
 	nextStopTextureIndex = 0;
-	SDL_RenderCopyEx(mainRenderer, nextTexture, NULL, renderingRect, NULL, NULL, flip);
+	SDL_RenderCopyEx(mainRenderer, nextTexture, NULL, &position, NULL, NULL, flip);
 }
 
-void CharacterTexture::renderMoveRight(SDL_Rect *renderingRect)
+void CharacterTexture::renderMoveRight(int positionX, int positionY, int positionW, int positionH)
 {
+	SDL_Rect position;
+	position.x = positionX;
+	position.y = positionY;
+	position.w = positionW;
+	position.h = positionH;
+
 	SDL_Texture *nextTexture = runningTextures[nextRightTextureIndex];
-	
+
 	previousCharacterDirection = 1;
 
 	Uint32 currentTicks = SDL_GetTicks();
@@ -177,11 +189,17 @@ void CharacterTexture::renderMoveRight(SDL_Rect *renderingRect)
 	nextLeftTextureIndex = 0;
 	nextStopTextureIndex = 0;
 
-	SDL_RenderCopy(mainRenderer, nextTexture, NULL, renderingRect);
+	SDL_RenderCopy(mainRenderer, nextTexture, NULL, &position);
 }
 
-void CharacterTexture::renderStop(SDL_Rect *renderingRect)
+void CharacterTexture::renderStop(int positionX, int positionY, int positionW, int positionH)
 {
+	SDL_Rect position;
+	position.x = positionX;
+	position.y = positionY;
+	position.w = positionW;
+	position.h = positionH;
+
 	SDL_Texture *nextTexture = stoppingTextures[nextStopTextureIndex];
 	Uint32 currentTicks = SDL_GetTicks();
 	if (currentTicks - lastStopRunningTime > (600 / stoppingTextures.size())) {
@@ -192,15 +210,15 @@ void CharacterTexture::renderStop(SDL_Rect *renderingRect)
 	if (nextStopTextureIndex >= stoppingTextures.size()) {
 		nextStopTextureIndex = 0;
 	}
-	nextRightTextureIndex;
-	nextLeftTextureIndex;
+	nextRightTextureIndex = 0;
+	nextLeftTextureIndex = 0;
 
 	// Need to flip if previous direction is left
 	if (previousCharacterDirection == 0) {
-		SDL_RenderCopyEx(mainRenderer, nextTexture, NULL, renderingRect, NULL, NULL, flip);
+		SDL_RenderCopyEx(mainRenderer, nextTexture, NULL, &position, NULL, NULL, flip);
 	}
 	else {
-		SDL_RenderCopy(mainRenderer, nextTexture, NULL, renderingRect);
+		SDL_RenderCopy(mainRenderer, nextTexture, NULL, &position);
 	}
 }
 
