@@ -36,7 +36,7 @@ void Character::move(float currentTimeTicks)
 	// Calculate currenct Velocity
 	Vector playerVelocity = VectorMath::multiplyScalar(playerDirection, playerSpeed);
 	// Create a vector which respects the time delta
-	Vector velocityRespectTimeDelta(playerVelocity.x * timeDeltaInSeconds, playerVelocity.y);
+	Vector velocityRespectTimeDelta(static_cast<int> (playerVelocity.x * timeDeltaInSeconds), playerVelocity.y);
 	
 	nextPosition.add(velocityRespectTimeDelta);
 

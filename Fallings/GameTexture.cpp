@@ -210,8 +210,8 @@ void CharacterTexture::renderStop(int positionX, int positionY, int positionW, i
 	if (nextStopTextureIndex >= stoppingTextures.size()) {
 		nextStopTextureIndex = 0;
 	}
-	nextRightTextureIndex;
-	nextLeftTextureIndex;
+	nextRightTextureIndex = 0;
+	nextLeftTextureIndex = 0;
 
 	// Need to flip if previous direction is left
 	if (previousCharacterDirection == 0) {
