@@ -4,23 +4,23 @@
 #include "Character.h"
 #include "CollisionDector.h"
 
-#ifndef ENERMY_H
-#define ENERMY_H
+#ifndef ENEMY_H
+#define ENEMY_H
 
-class Enermy
+class Enemy
 {
 public:
-	Enermy(int pos, SDL_Renderer *renderer);
-	~Enermy();
+	Enemy(int pos, SDL_Renderer *renderer);
+	~Enemy();
 	bool render(int addPixel, SDL_Rect *characterPosition, int *points);
 	bool checkCollection(SDL_Rect *characterPosition);
 	int const getPosition();
 	void isHit();
 private:
 	SDL_Renderer *mainRenderer = NULL;
-	EnermyTexture enermyTexture;
+	EnemyTexture enemyTexture;
 	CollisonDector collisionDector;
-	SDL_Rect enermyRect;
+	SDL_Rect enemyRect;
 
 	int position;
 	int currentY = 0;
@@ -31,9 +31,9 @@ class EneryController
 public:
 	EneryController(int width, int height, SDL_Renderer *mainRenderer, int *currentPoints);
 	~EneryController();
-	void addEnermy();
+	void addEnemy();
 	void update(float currentTimeTick, SDL_Rect *characterPosition);
-	std::vector <Enermy > enermyCollection;
+	std::vector <Enemy> enemyCollection;
 
 private:
 	std::vector<int> getValidPositions();

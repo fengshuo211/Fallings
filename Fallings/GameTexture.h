@@ -62,14 +62,14 @@ private:
 	int imageHeight = 0;
 };
 
-class EnermyTexture {
+class EnemyTexture {
 public:
-	EnermyTexture(SDL_Renderer *renderer);
-	~EnermyTexture();
-	void renderEnermy(SDL_Rect *renderRect);
+	EnemyTexture(SDL_Renderer *renderer);
+	~EnemyTexture();
+	void renderEnemy(SDL_Rect *renderRect);
 private:
 	SDL_Texture *convertImageToTexture(char *filePath);
 	SDL_Renderer *mainRenderer = NULL;
-	SDL_Texture *enermyTexture = NULL;
+	SDL_Texture *enemyTexture = NULL;
 };
 #endif

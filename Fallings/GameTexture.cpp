@@ -222,27 +222,27 @@ void CharacterTexture::renderStop(int positionX, int positionY, int positionW, i
 	}
 }
 
-EnermyTexture::EnermyTexture(SDL_Renderer * renderer)
+EnemyTexture::EnemyTexture(SDL_Renderer * renderer)
 {
 	mainRenderer = renderer;
-	enermyTexture = convertImageToTexture("assets/items/apple_red.png");
-	if (enermyTexture == NULL) {
-		printf("Failed to load enermy Texture\n");
+	enemyTexture = convertImageToTexture("assets/items/apple_red.png");
+	if (enemyTexture == NULL) {
+		printf("Failed to load enemy Texture\n");
 	}
 }
 
-EnermyTexture::~EnermyTexture()
+EnemyTexture::~EnemyTexture()
 {
 	mainRenderer = NULL;
-	enermyTexture = NULL;
+	enemyTexture = NULL;
 }
 
-void EnermyTexture::renderEnermy(SDL_Rect * renderRect)
+void EnemyTexture::renderEnemy(SDL_Rect * renderRect)
 {
-	SDL_RenderCopy(mainRenderer, enermyTexture, NULL, renderRect);
+	SDL_RenderCopy(mainRenderer, enemyTexture, NULL, renderRect);
 }
 
-SDL_Texture * EnermyTexture::convertImageToTexture(char * filePath)
+SDL_Texture * EnemyTexture::convertImageToTexture(char * filePath)
 {
 	SDL_Surface *tempImageSurface = IMG_Load(filePath);
 	if (tempImageSurface == NULL) {

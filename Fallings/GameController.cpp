@@ -10,7 +10,7 @@
 #include "GameController.h"
 #include "GameTexture.h"
 #include "Character.h"
-#include "Enermy.h"
+#include "Enemy.h"
 #include "Vector.h"
 
 GameController::GameController(){}
@@ -69,9 +69,9 @@ void GameController::startGame()
 	std::stringstream frameCountNumberText;
 
 	Character mainCharacter(SCREEN_WIDTH / 2, SCREEN_HEIGHT - floorRect.h - 40, mainGameWindowRenderer, SCREEN_WIDTH, SCREEN_HEIGHT);
-	EneryController enermyController (SCREEN_WIDTH, SCREEN_HEIGHT, mainGameWindowRenderer, &points);
+	EneryController enemyController (SCREEN_WIDTH, SCREEN_HEIGHT, mainGameWindowRenderer, &points);
 	music = Mix_LoadMUS("assets/music/background.wav");
-	enermyController.addEnermy();
+	enemyController.addEnemy();
 
 	int timeLeftInSeconds = 0;
 	float frameCountNumber = 0;
@@ -105,7 +105,7 @@ void GameController::startGame()
 		playerPositionInRect->h = mainCharacter.getPlayerHeight();
 		playerPositionInRect->w = mainCharacter.getPlayerWidth();
 
-		enermyController.update(currentTicks, playerPositionInRect);
+		enemyController.update(currentTicks, playerPositionInRect);
 		delete playerPositionInRect;
 
 		timeLeftInSeconds = static_cast<int> (currentTicks / 1000);
