@@ -109,7 +109,7 @@ void GameController::startGame()
 		delete playerPositionInRect;
 
 		timeLeftInSeconds = static_cast<int> (currentTicks / 1000);
-		timeLeftInSeconds = 3 - timeLeftInSeconds;
+		timeLeftInSeconds = 60 - timeLeftInSeconds;
 
 		frameCountNumber = frameGenerated / (SDL_GetTicks() / 1000.f);
 
