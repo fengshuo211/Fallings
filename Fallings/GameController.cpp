@@ -56,11 +56,11 @@ void GameController::startGame()
 	SDL_Event gameEvent;
 
 	TextTexture timePassedText;
-	timePassedText.setFont("fonts/lazy.ttf", 28);
+	timePassedText.setFont("fonts/Roboto-Light.ttf", 28);
 	timePassedText.setColor(0, 0, 0);
 
 	TextTexture frameCountText;
-	frameCountText.setFont("fonts/lazy.ttf", 28);
+	frameCountText.setFont("fonts/Roboto-Light.ttf", 28);
 	frameCountText.setColor(0, 0, 0);
 
 	int frameGenerated = 0;
@@ -109,7 +109,7 @@ void GameController::startGame()
 		delete playerPositionInRect;
 
 		timeLeftInSeconds = static_cast<int> (currentTicks / 1000);
-		timeLeftInSeconds = 60 - timeLeftInSeconds;
+		timeLeftInSeconds = 3 - timeLeftInSeconds;
 
 		frameCountNumber = frameGenerated / (SDL_GetTicks() / 1000.f);
 
@@ -121,8 +121,8 @@ void GameController::startGame()
 		frameCountNumberText.str("");
 		frameCountNumberText << frameCountNumber;
 
-		timePassedText.renderText(timePassed.str().c_str(), mainGameWindowRenderer, 200, 0, 20, 20);
-		frameCountText.renderText(frameCountNumberText.str().c_str(), mainGameWindowRenderer, 90, 20, 50, 20);
+		timePassedText.renderText(timePassed.str().c_str(), mainGameWindowRenderer, 100, 0, 20, 20);
+		frameCountText.renderText(frameCountNumberText.str().c_str(), mainGameWindowRenderer, 80, 20, 50, 20);
 		
 		renderGame();
 		frameGenerated++;
@@ -158,15 +158,15 @@ void GameController::renderBackground()
 	gameFloorTexture->renderWithRect(&floorRect);
 
 	TextTexture textTexture;
-	textTexture.setFont("fonts/lazy.ttf", 28);
+	textTexture.setFont("fonts/Roboto-Light.ttf", 28);
 	textTexture.setColor(0, 0, 0);
-	textTexture.renderText("Time Left: ", mainGameWindowRenderer, 0, 0, 200, 20);
-	textTexture.renderText("Frame: ", mainGameWindowRenderer, 0, 20, 100, 20);
-	textTexture.renderText("Points: ", mainGameWindowRenderer, SCREEN_WIDTH - 120, 10, 80, 20);
+	textTexture.renderText("Time Left: ", mainGameWindowRenderer, 0, 0, 100, 20);
+	textTexture.renderText("Frame: ", mainGameWindowRenderer, 0, 20, 70, 20);
+	textTexture.renderText("Points: ", mainGameWindowRenderer, SCREEN_WIDTH - 120, 0, 80, 20);
 
 	std::stringstream val;
 	val << points;
-	textTexture.renderText(val.str().c_str(), mainGameWindowRenderer, SCREEN_WIDTH - 50, 10, 20, 20);
+	textTexture.renderText(val.str().c_str(), mainGameWindowRenderer, SCREEN_WIDTH - 40, 0, 15, 20);
 }
 
 void GameController::renderGameEnd()
@@ -174,13 +174,13 @@ void GameController::renderGameEnd()
 	gameBackgroundTexture->render();
 
 	TextTexture textTexture;
-	textTexture.setFont("fonts/lazy.ttf", 28);
+	textTexture.setFont("fonts/Roboto-Light.ttf", 28);
 	textTexture.setColor(0, 0, 0);
-	textTexture.renderText("Points: ", mainGameWindowRenderer, SCREEN_WIDTH / 2 - 140, SCREEN_HEIGHT - 400, 200, 120);
 
 	std::stringstream val;
+	val << "Points: ";
 	val << points;
-	textTexture.renderText(val.str().c_str(), mainGameWindowRenderer, SCREEN_WIDTH / 2, SCREEN_HEIGHT - 380, 180, 100);
+	textTexture.renderText(val.str().c_str(), mainGameWindowRenderer, SCREEN_WIDTH / 2 - 130, SCREEN_HEIGHT - 400, 200, 120);
 
 	gameFloorTexture->renderWithRect(&floorRect);
 }
